@@ -46,13 +46,13 @@ namespace DasBot.Controllers
                         {
                             var d = App_Code.Distance.ModifyedLevensteinDistance(words[0], words[1]);
                             if (d == 0)
-                                result = "Эти два слова одинаковы!";
+                                result = $"Эти два слова одинаковы! ({1 - d}%)";
                             else if (d <= 0.25)
-                                result = "Эти два слова очень похожи.";
-                            else if (d <= 0.40)
-                                result = "Эти два слова чем-то похожи.";
+                                result = $"Эти два слова очень похожи. ({1 - d}%)";
+                            else if (d <= 0.50)
+                                result = $"Эти два слова чем-то похожи.  ({1 - d}%)";
                             else
-                                result = "Эти два слова не похожи";
+                                result = $"Эти два слова не похожи. ({1 - d}%)";
                         }
                         _vkApi.Messages.Send(new MessagesSendParams
                         {
